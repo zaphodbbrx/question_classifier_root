@@ -81,15 +81,15 @@ class QuestionClassifier():
         
     def __prepare_network(self):
         model = Sequential()
-        model.add(Conv1D(filters = 25, kernel_size = 2, input_shape = (15, 50), activation='relu'))
+        model.add(Conv1D(filters = 42, kernel_size = 2, input_shape = (15,50), activation='relu'))
         model.add(Conv1D(filters = 20, kernel_size = 2, activation='relu'))
         model.add(Conv1D(filters = 15, kernel_size = 2, activation='relu'))
         model.add(Conv1D(filters = 10, kernel_size = 2, activation='relu'))
-        model.add(MaxPooling1D(1))
+        model.add(MaxPooling1D(4))
         model.add(Flatten())
         model.add(Dropout(0.5))
         model.add(Dense(5, activation='softmax'))
-        model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['categorical_accuracy'])
+        model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
         model.load_weights('weights.hdf5')
         return model
 
